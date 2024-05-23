@@ -20,7 +20,8 @@ ggplot(data, aes(x = experience_level)) +
   theme_minimal()
 
 # 工作經驗對於薪資(美元)箱形圖
-ggplot(data, aes(x = experience_level, y = salary_in_usd)) +
+data$experience_level_factor <- factor(data$experience_level, levels = c("EN", "MI", "SE", "EX"))
+ggplot(data, aes(x = experience_level_factor, y = salary_in_usd)) +
   geom_boxplot() +
   labs(title = "Experience Level vs Salary in USD",
        x = "Experience Level",
