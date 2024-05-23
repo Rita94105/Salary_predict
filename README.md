@@ -3,9 +3,9 @@
 ## Contributors 
 ||Name|ID|Workload|
 |-|---|---|---|
-|1| 陳文遠|112971012|data processing|
-|2| 王世儒|112971006|model training|
-|3| 任芝萱|112971020|shiny app developing|
+|1| 陳文遠|112971012|Data processing|
+|2| 王世儒|112971006|Model training|
+|3| 任芝萱|112971020|Shiny app developing|
 
 ## Description
 
@@ -36,6 +36,6 @@ In our Data Science course this semester, we were particularly intrigued by the 
 
 ## Data Preprocessing
 
-## Model traingin and results
+## Model training and results
 
 ## Reference
