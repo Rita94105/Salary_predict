@@ -62,3 +62,20 @@ target_encoding <- function(data, col, target) {
   encode_result <- target_encode(data, target_encoding = target_encode_tmp)
   return(encode_result[[length(encode_result)]])
 }
+
+do_one_hot_encoding <- function(data, col_name) {
+  category_name <- col_name
+  formula_str <- paste("~", category_name, "- 1")
+  formula_obj <- as.formula(formula_str)
+  encoded_df <- model.matrix(formula_obj, data = data)
+  colnames(encoded_df) <- make.names(colnames(encoded_df))
+  
+  combined_data <- cbind(data, encoded_df)
+  return(combined_data)
+}
+
+do_kmeans <- function(data, cluster_count) {
+  k <- cluster_count
+  kmeans_result <- kmeans(data$salary_in_usd, centers = k)
+  return(as.factor(kmeans_result$cluster))
+}
