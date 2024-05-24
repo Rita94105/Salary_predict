@@ -13,8 +13,11 @@ server <- function(input, output) {
       footer = NULL
     ))
   })
+
+  #data <- read.csv("../Data/salaries.csv")
   
-  data <- read.csv("../Data/salaries.csv")
+  # use when publish on Shinyapps
+  data <- read.csv("salaries.csv")
   
   # salary distribution
   output$salary_bar <- renderPlot({
