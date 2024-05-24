@@ -1,4 +1,6 @@
-# [Group01] Data Engineer Salary Predict
+# [Data Engineer Salary Predict](https://rita94105.shinyapps.io/Salary_2024/)
+
+In our Data Science course this semester, we were particularly intrigued by the current landscape of data science-related careers, specifically focusing on compensation trends. To satisfy our curiosity and academic requirements, we decided to explore a relevant dataset found on Kaggle: "Data Engineer Salary in 2024."
 
 ## Contributors 
 ||Name|ID|Workload|
@@ -6,10 +8,6 @@
 |1| 陳文遠|112971012|Data processing|
 |2| 王世儒|112971006|Model training|
 |3| 任芝萱|112971020|Shiny app developing|
-
-## Description
-
-In our Data Science course this semester, we were particularly intrigued by the current landscape of data science-related careers, specifically focusing on compensation trends. To satisfy our curiosity and academic requirements, we decided to explore a relevant dataset found on Kaggle: "Data Engineer Salary in 2024."
 
 ## [Data](https://www.kaggle.com/datasets/chopper53/data-engineer-salary-in-2024)
 
