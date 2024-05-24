@@ -22,7 +22,7 @@ server <- function(input, output) {
   # salary distribution
   output$salary_bar <- renderPlot({
     ggplot(data, aes(x = salary_in_usd)) +
-      geom_histogram(binwidth = 50000, fill = "orange", color = "black") +
+      geom_histogram(binwidth = 50000, fill = "#ffce67", color = "black") +
       labs(x = "Salary in USD",
            y = "Frequency") +
       scale_x_continuous(labels = scales::comma) +
@@ -32,7 +32,7 @@ server <- function(input, output) {
   #work experience distribution
   output$work_bar <- renderPlot({
     ggplot(data, aes(x = experience_level)) +
-      geom_bar(fill = "yellow", color = "black") +
+      geom_bar(fill = "#E9ECEF", color = "black") +
       labs(title = "Distribution of Experience Levels",
            x = "Experience Level",
            y = "Count") +
@@ -61,18 +61,15 @@ server <- function(input, output) {
   })
   
   # Compute values for value boxes
-  output$job_title <-
-    renderText({
+  output$job_title <- renderText({
       length(unique(data$job_title))
     })
   
-  output$number_of_rows <-
-    renderText({
+  output$number_of_rows <- renderText({
       nrow(data)
     })
   
-  output$average_salary <-
-    renderText({
+  output$average_salary <- renderText({
       sum(data$salary_in_usd) / nrow(data)
     })
   
