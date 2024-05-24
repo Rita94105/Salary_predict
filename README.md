@@ -37,15 +37,21 @@ In our Data Science course this semester, we were particularly intrigued by the 
 ## Data Preprocessing
 
 ### Library
+1. [smotfamily](https://cran.r-project.org/web/packages/smotefamily/smotefamily.pdf)
+2. [ggplot2](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+
 ### Process
 1. Checking the type of data
 2. Dropping the duplicate data
 3. Counting the number of rows
 4. Dropping the missing or null value
 5. Detecting outliers
-6. One-hot encoding
-7. Data cluster by kmeans
-8. Spliting data by salary_in_usd 150000
+6. SMOTE
+7. Ordinal Encoding
+8. Target Encoding
+9. One-hot encoding
+10. Clustering data by kmeans
+11. Spliting data by salary_in_usd 150000
 
 ## Model training and results
 
