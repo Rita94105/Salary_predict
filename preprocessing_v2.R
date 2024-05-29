@@ -12,7 +12,7 @@ for (col in cols_encoding) {
 }
 
 # k-means
-data$salary_in_usd_cluster <- do_kmeans(data, 10)
+# data$salary_in_usd_cluster <- do_kmeans(data, 10)
 colnames(data)
 
 # split data by salary_in_usd 150000
