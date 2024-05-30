@@ -4,9 +4,9 @@ encoding_type <- "onehot"
 encoding_type <- "target"
 
 # sin log function
-# signedlog10 <- function(x) {
-#   ifelse(abs(x) <= 1, 0, sign(x) * log10(abs(x)))
-# }
+signedlog10 <- function(x) {
+  ifelse(abs(x) <= 1, 0, sign(x) * log10(abs(x)))
+}
 
 # log file
 dir.create("./logs", showWarnings = F)
@@ -36,6 +36,7 @@ library(data.table)
 
 library(randomForest)
 library(gbm)
+library(class)
 
 library(caret)
 library(caretEnsemble)
@@ -52,7 +53,7 @@ setDT(data)
 ##### Data Preprocessing ##### 
 
 # use sin log
-# data[, salary_in_log := signedlog10(salary_in_usd)]
+data[, salary_in_usd := signedlog10(salary_in_usd)]
 # data[, salary_in_usd := NULL]
 
 # remove useless columns
@@ -69,8 +70,17 @@ if (encoding_type == "onehot"){
   data <- data[, !c("work_year", "experience_level", "employment_type",
                     "job_title", "salary", "salary_currency",
                     "employee_residence", "company_location", "company_size",
+                    "company_location_encoded",
                     "salary_in_usd_double")]
 }
+
+# remove outliers of y
+Q1 <- quantile(data$salary_in_usd, 0.25, na.rm = T)
+Q3 <- quantile(data$salary_in_usd, 0.75, na.rm = T)
+IQR <- Q3 - Q1
+lower_bound <- Q1 - 1.5 * IQR
+upper_bound <- Q3 + 1.5 * IQR
+data <- data[salary_in_usd > lower_bound & salary_in_usd < upper_bound]
 
 ##### Train Test Split #####
 # train:test = 8:2
@@ -198,6 +208,15 @@ cat("=====================================================================\n")
 
 # 關閉文件輸出
 sink()
+
+# ggplot(data = test_data, aes(x = salary_in_usd, y = salary_in_usd- pred))+
+#   geom_point()+
+#   stat_smooth(method="loess")+
+#   geom_hline(yintercept=0, col="red", linetype="dashed")
+# 
+# library(ggcorrplot)
+# 
+# ggcorrplot(cor(data %>% select(-salary_in_usd)), lab = T)
 
 # 查看訓練過程中的詳細資訊（可選）
 # cat(readLines("./logs/training_output.txt"), sep = "\n")
