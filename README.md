@@ -12,7 +12,7 @@ In our Data Science course this semester, we were particularly intrigued by the 
 
 ## [Data](https://www.kaggle.com/datasets/chopper53/data-engineer-salary-in-2024)
 
-### About Data Set
+### About Dataset
 
 This dataset provides insights into data engineer salaries and employment attributes for the year 2024. It includes information such as salary, job title, experience level, employment type, employee residence, remote work ratio, company location, and company size.
 
@@ -20,63 +20,31 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 
 ### Feature Description
 
-| Feature Name   | Type        | Description             |
-|--------|-----------|----------------------|
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-|  |  |       |
-
--   work_year: The year in which the data was collected (2024).
--   experience_level: The experience level of the employee, categorized as SE (Senior Engineer), MI (Mid-Level Engineer), or EL (Entry-Level Engineer).
--   employment_type: The type of employment, such as full-time (FT), part-time (PT), contract (C), or freelance (F).
--   job_title: The title or role of the employee within the company, for example, AI Engineer.
--   salary: The salary of the employee in the local currency (e.g., 202,730 USD).
--   salary_currency: The currency in which the salary is denominated (e.g., USD).
--   salary_in_usd: The salary converted to US dollars for standardization purposes.
--   employee_residence: The country of residence of the employee.
--   remote_ratio: The ratio indicating the extent of remote work allowed in the position (0 for no remote work, 1 for fully remote).
--   company_location: The location of the company where the employee is employed.
--   company_size: The size of the company, often categorized by the number of employees (S for small, M for medium, L for large).
+|     | Feature Name   | Type        | Description             |
+|--------|--------|-----------|----------------------|
+| 1   | work_year | numerical | The year in which the data was collected (2024). |
+| 2   |  experience_level | ordinal |    The experience level of the employee, categorized as SE (Senior Engineer), MI (Mid-Level Engineer), or EL (Entry-Level Engineer).   |
+| 3   |  employment_type| ordinal |   The type of employment, such as full-time (FT), part-time (PT), contract (C), or freelance (F).    |
+| 4   |  job_title| nominal |   The title or role of the employee within the company, for example, AI Engineer.    |
+| 5   |  salary| not used |    The salary of the employee in the local currency (e.g., 202,730 USD).   |
+| 6   |  salary_currency| not used |   The currency in which the salary is denominated (e.g., USD).    |
+| 7   |  salary_in_usd| numerical (target) |    The salary converted to US dollars for standardization purposes.   |
+| 8   |  employee_residence| nominal |    The country of residence of the employee.   |
+| 9   |  remote_ratio| ordinal |    The ratio indicating the extent of remote work allowed in the position (0 for no remote work, 1 for fully remote).   |
+| 10   |  company_location| nominal |    The location of the company where the employee is employed.   |
+| 11   |  company_size| ordinal |    The size of the company, often categorized by the number of employees (S for small, M for medium, L for large).   |
 
 ### Our Target
 We try to use these features of the dataset to predict the salaries of data science-related jobs.
 
 ## Exploratory Data Analysis(EDA)
 
-### Boxplot
-
--   x: categorical feature
-
--   y: salary_in_usd
-
--   order by [median of salary_in_usd] descending
-
-### Barplot
-
--   x: categorical feature
-
--   y: [avg. of salary_in_usd] or [counts]
-
--   order by [avg. of salary_in_usd] or [counts] descending
-
-### Histogram: salary_in_usd
-
--   x: bins
-
--   y: frequency
-
-### Histogram: signedlog10(salary_in_usd)
-
--   x: bins
-
--   y: frequency
+| Graph Type   | horizontal axis  | vertical axis   | note |
+|--------|-----------|----------------------|--------|
+| Boxplot   | categorical feature  | salary_in_usd   | order by median descending |
+| Barplot   | categorical feature  | avg. of salary_in_usd or counts   | order by value descending |
+| Histogram | bins of salary_in_usd  | frequency   |  |
+| Histogram | bins of signedlog10(salary_in_usd)  | frequency   |  |
 
 ## Data Preprocessing
 
@@ -97,7 +65,7 @@ We try to use these features of the dataset to predict the salaries of data scie
 6.  SMOTE
 7.  Ordinal Encoding
 8.  Target Encoding
-9.  sine logarithm: transform our prediction target.
+9.  function signedlog10(): transform our prediction target.
 ``` r
 # sin log function
 signedlog10 <- function(x) {
@@ -109,7 +77,7 @@ signedlog10 <- function(x) {
 
 ### Target Encoding
 
-We use target encoding to calculate the mean of signedlog10(salary_in_usd) for each feature.
+We use target encoding to calculate the mean of **signedlog10(salary_in_usd)** for each feature.
 
 After target encoding, we use [ggcorrplot](https://cran.r-project.org/web/packages/ggcorrplot/ggcorrplot.pdf) to generate the correlation matrix for the features.
 
@@ -121,17 +89,13 @@ ggcorrplot(correlation_matrix, lab = T)
 
 ### Training
 
-1. We use random forest and gradient boosting to build an ensemble learning model to predict signedlog10(salary_in_usd).
+1. We use [randomForest](https://cran.r-project.org/web/packages/randomForest/index.html) and gradient boosting ([gbm](https://cran.r-project.org/web/packages/caret/gbm.html)) to build an ensemble learning model to predict **signedlog10(salary_in_usd)**.
 
-2. Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
+2. Ensemble Learning: Use [caret](https://cran.r-project.org/web/packages/caret/index.html) and [caretEnsemble](https://cran.r-project.org/web/packages/caretEnsemble/index.html)
+- Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
 
-3. We also use cross-validation (5-fold) and grid search to find the best hyperparameters.
-
-- [randomForest](https://cran.r-project.org/web/packages/randomForest/index.html)
-- [gbm](https://cran.r-project.org/web/packages/caret/gbm.html)
-- [caret](https://cran.r-project.org/web/packages/caret/index.html)
-- [caretEnsemble](https://cran.r-project.org/web/packages/caretEnsemble/index.html)
-  - Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
+4. We also use cross-validation (5-fold) and grid search to find the best hyperparameters.
+5. We use MAE and RMSE to evaluate the performance of model.
 
 ``` r
 library(randomForest)
@@ -181,17 +145,17 @@ dataframe
 
 ### Measurement
 
-MAE:
-
-RMSE:
+| Train / Test   | MAE        | RMSE             |
+|--------|-----------|----------------------|
+| Train | 0 | 0      |
 
 scatter plot: true vs pred
 
 ### Prediction
 
-MAE:
-
-RMSE:
+| Train / Test   | MAE        | RMSE             |
+|--------|-----------|----------------------|
+| Test | 0 | 0       |
 
 scatter plot: true vs pred
 
@@ -203,7 +167,7 @@ scatter plot: true vs pred
 | Train | 0 | 0      |
 | Test | 0 | 0       |
 
-3. [AIML salaries 2022-2024 AutoViz+CatBoost+SHAP](https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap)
+2. [AIML salaries 2022-2024 AutoViz+CatBoost+SHAP](https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap)
 
 - RMSE score for train 51.4 kUSD/year, and for test 52.0 kUSD/year
 
@@ -215,6 +179,7 @@ scatter plot: true vs pred
 
 - test RMSE: 57857.07162184822
 
-### Improvement
+## Conclusion
+Our accuracy is already significantly better than other results on Kaggle. However, this is a passable result. We need more data or features to optimize our model training to achieve results that most people can accept. Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.
 
 ## Reference
