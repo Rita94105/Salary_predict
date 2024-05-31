@@ -20,6 +20,19 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 
 ### Feature Description
 
+| Feature Name   | Type        | Description             |
+|--------|-----------|----------------------|
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+|  |  |       |
+
 -   work_year: The year in which the data was collected (2024).
 -   experience_level: The experience level of the employee, categorized as SE (Senior Engineer), MI (Mid-Level Engineer), or EL (Entry-Level Engineer).
 -   employment_type: The type of employment, such as full-time (FT), part-time (PT), contract (C), or freelance (F).
@@ -33,7 +46,7 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 -   company_size: The size of the company, often categorized by the number of employees (S for small, M for medium, L for large).
 
 ### Our Target
-We try to use the features of the dataset to predict the salaries of data science-related jobs.
+We try to use these features of the dataset to predict the salaries of data science-related jobs.
 
 ## Exploratory Data Analysis(EDA)
 
@@ -71,6 +84,8 @@ We try to use the features of the dataset to predict the salaries of data scienc
 
 1.  [smotfamily](https://cran.r-project.org/web/packages/smotefamily/smotefamily.pdf)
 2.  [ggplot2](https://cran.r-project.org/web/packages/ggplot2/ggplot2.pdf)
+3.  [dataPreparation](https://cran.r-project.org/web/packages/dataPreparation/index.html)
+4.  [data.table](https://cran.r-project.org/web/packages/data.table/index.html)
 
 ### Process
 
@@ -82,11 +97,7 @@ We try to use the features of the dataset to predict the salaries of data scienc
 6.  SMOTE
 7.  Ordinal Encoding
 8.  Target Encoding
-9.  One-hot encoding
-10. Clustering data by kmeans
-11. Spliting data by salary_in_usd 150000
-
-We use the sine logarithm to transform our prediction target.
+9.  sine logarithm: transform our prediction target.
 ``` r
 # sin log function
 signedlog10 <- function(x) {
@@ -100,7 +111,7 @@ signedlog10 <- function(x) {
 
 We use target encoding to calculate the mean of signedlog10(salary_in_usd) for each feature.
 
-After target encoding, we generate the correlation matrix for the features.
+After target encoding, we use [ggcorrplot](https://cran.r-project.org/web/packages/ggcorrplot/ggcorrplot.pdf) to generate the correlation matrix for the features.
 
 ``` r
 library(ggcorrplot)
@@ -110,7 +121,17 @@ ggcorrplot(correlation_matrix, lab = T)
 
 ### Training
 
-We use random forest and gradient boosting to build an ensemble learning model to predict signedlog10(salary_in_usd).
+1. We use random forest and gradient boosting to build an ensemble learning model to predict signedlog10(salary_in_usd).
+
+2. Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
+
+3. We also use cross-validation (5-fold) and grid search to find the best hyperparameters.
+
+- [randomForest](https://cran.r-project.org/web/packages/randomForest/index.html)
+- [gbm](https://cran.r-project.org/web/packages/caret/gbm.html)
+- [caret](https://cran.r-project.org/web/packages/caret/index.html)
+- [caretEnsemble](https://cran.r-project.org/web/packages/caretEnsemble/index.html)
+  - Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
 
 ``` r
 library(randomForest)
@@ -177,10 +198,10 @@ scatter plot: true vs pred
 ### Compare with Kaggle
 1. Our Performance
 
-|     | Train / Test   | MAE        | RMSE             |
-|-----|--------|-----------|----------------------|
-| 1   | Train | 0 | 0      |
-| 2   | Test | 0 | 0       |
+| Train / Test   | MAE        | RMSE             |
+|--------|-----------|----------------------|
+| Train | 0 | 0      |
+| Test | 0 | 0       |
 
 3. [AIML salaries 2022-2024 AutoViz+CatBoost+SHAP](https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap)
 
