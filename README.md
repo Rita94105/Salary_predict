@@ -32,6 +32,9 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 -   company_location: The location of the company where the employee is employed.
 -   company_size: The size of the company, often categorized by the number of employees (S for small, M for medium, L for large).
 
+### Our Target
+We try to use the features of the dataset to predict the salaries of data science-related jobs.
+
 ## Exploratory Data Analysis(EDA)
 
 ### Boxplot
@@ -42,7 +45,7 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 
 -   order by [median of salary_in_usd] descending
 
-### Bar plot
+### Barplot
 
 -   x: categorical feature
 
@@ -83,6 +86,7 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 10. Clustering data by kmeans
 11. Spliting data by salary_in_usd 150000
 
+We use the sine logarithm to transform our prediction target.
 ``` r
 # sin log function
 signedlog10 <- function(x) {
@@ -94,9 +98,9 @@ signedlog10 <- function(x) {
 
 ### Target Encoding
 
-We use target encoding to calculate mean of signedlog10(salary_in_usd) by each feature.
+We use target encoding to calculate the mean of signedlog10(salary_in_usd) for each feature.
 
-After target encoding, we generate the correlation matrix of features.
+After target encoding, we generate the correlation matrix for the features.
 
 ``` r
 library(ggcorrplot)
@@ -106,9 +110,7 @@ ggcorrplot(correlation_matrix, lab = T)
 
 ### Training
 
-We use "random forest" and "gradient boosting"
-
-to build an ensemble learning model for predict signedlog10(salary_in_usd).
+We use random forest and gradient boosting to build an ensemble learning model to predict signedlog10(salary_in_usd).
 
 ``` r
 library(randomForest)
@@ -158,17 +160,39 @@ dataframe
 
 ### Measurement
 
+MAE:
+
 RMSE:
 
 scatter plot: true vs pred
 
 ### Prediction
 
+MAE:
+
 RMSE:
 
 scatter plot: true vs pred
 
 ### Compare with Kaggle
+1. Our Performance
+
+|     | Train / Test   | MAE        | RMSE             |
+|-----|--------|-----------|----------------------|
+| 1   | Train | 0 | 0      |
+| 2   | Test | 0 | 0       |
+
+3. [AIML salaries 2022-2024 AutoViz+CatBoost+SHAP](https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap)
+
+- RMSE score for train 51.4 kUSD/year, and for test 52.0 kUSD/year
+
+3. [Neural Network Regression Models](https://www.kaggle.com/code/samuelmason23/neural-network-regression-models)
+
+- train MAE: 40320.1875
+
+- test MAE: 40320.18831030768
+
+- test RMSE: 57857.07162184822
 
 ### Improvement
 
