@@ -22,13 +22,13 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 
 |     | Feature Name   | Type        | Description             |
 |--------|--------|-----------|----------------------|
-| 1   | work_year | numerical | The year in which the data was collected (2024). |
+| 1   | work_year | [deprecated] | The year in which the data was collected (2024). |
 | 2   |  experience_level | ordinal |    The experience level of the employee, categorized as SE (Senior Engineer), MI (Mid-Level Engineer), or EL (Entry-Level Engineer).   |
 | 3   |  employment_type| ordinal |   The type of employment, such as full-time (FT), part-time (PT), contract (C), or freelance (F).    |
 | 4   |  job_title| nominal |   The title or role of the employee within the company, for example, AI Engineer.    |
-| 5   |  salary| not used |    The salary of the employee in the local currency (e.g., 202,730 USD).   |
-| 6   |  salary_currency| not used |   The currency in which the salary is denominated (e.g., USD).    |
-| 7   |  salary_in_usd| numerical (target) |    The salary converted to US dollars for standardization purposes.   |
+| 5   |  salary| [deprecated] |    The salary of the employee in the local currency (e.g., 202,730 USD).   |
+| 6   |  salary_currency| [deprecated] |   The currency in which the salary is denominated (e.g., USD).    |
+| 7   |  salary_in_usd| numerical (predicted) |    The salary converted to US dollars for standardization purposes.   |
 | 8   |  employee_residence| nominal |    The country of residence of the employee.   |
 | 9   |  remote_ratio| ordinal |    The ratio indicating the extent of remote work allowed in the position (0 for no remote work, 1 for fully remote).   |
 | 10   |  company_location| nominal |    The location of the company where the employee is employed.   |
@@ -39,7 +39,7 @@ We try to use these features of the dataset to predict the salaries of data scie
 
 ## Exploratory Data Analysis(EDA)
 
-| Graph Type   | horizontal axis  | vertical axis   | note |
+| Graph Type   | Horizontal Axis (x)  | Vertical Axis (y)  | Note |
 |--------|-----------|----------------------|--------|
 | Boxplot   | categorical feature  | salary_in_usd   | order by median descending |
 | Barplot   | categorical feature  | avg. of salary_in_usd or counts   | order by value descending |
@@ -73,7 +73,7 @@ signedlog10 <- function(x) {
 }
 ```
 
-## Model training and results
+## Model Training and Results
 
 ### Target Encoding
 
@@ -160,7 +160,7 @@ scatter plot: true vs pred
 scatter plot: true vs pred
 
 ### Compare with Kaggle
-1. Our Performance
+1. Our Performance👑
 
 | Train / Test   | MAE        | RMSE             |
 |--------|-----------|----------------------|
@@ -180,6 +180,10 @@ scatter plot: true vs pred
 - test RMSE: 57857.07162184822
 
 ## Conclusion
-Our accuracy is already significantly better than other results on Kaggle. However, this is a passable result. We need more data or features to optimize our model training to achieve results that most people can accept. Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.
+Our accuracy is already significantly better than other results on Kaggle. 
+
+However, this is a passable result. We need more data or features to optimize our model training to achieve results that most people can accept. 
+
+Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.
 
 ## Reference
