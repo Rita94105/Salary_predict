@@ -81,6 +81,8 @@ We use target encoding to calculate the mean of **signedlog10(salary_in_usd)** f
 
 After target encoding, we use [ggcorrplot](https://cran.r-project.org/web/packages/ggcorrplot/ggcorrplot.pdf) to generate the correlation matrix for the features.
 
+![](/output/correlation_matrix.png)
+
 ``` r
 library(ggcorrplot)
 correlation_matrix <- cor(data %>% select(-salary_in_usd))
@@ -178,6 +180,7 @@ ens_model <- caretEnsemble(model_list)
 | Train  | 46728.5916975186       |
 
 scatter plot: true vs pred
+![](/output/scatterplot_train_data.png)
 
 ### Prediction
 
@@ -186,6 +189,7 @@ scatter plot: true vs pred
 | Test | 47087.3351748348        |
 
 scatter plot: true vs pred
+![](/output/scatterplot_test_data.png)
 
 ### Compare with other results on Kaggle
 1. Our Performance👑
