@@ -22,13 +22,13 @@ The dataset allows for analysis of salary trends, employment patterns, and geogr
 
 |     | Feature Name   | Type        | Description             |
 |--------|--------|-----------|----------------------|
-| 1   | work_year | [deprecated] | The year in which the data was collected (2024). |
+| 1   | work_year | [❌deprecated] | The year in which the data was collected (2024). |
 | 2   |  experience_level | ordinal |    The experience level of the employee, categorized as SE (Senior Engineer), MI (Mid-Level Engineer), or EL (Entry-Level Engineer).   |
 | 3   |  employment_type| ordinal |   The type of employment, such as full-time (FT), part-time (PT), contract (C), or freelance (F).    |
 | 4   |  job_title| nominal |   The title or role of the employee within the company, for example, AI Engineer.    |
-| 5   |  salary| [deprecated] |    The salary of the employee in the local currency (e.g., 202,730 USD).   |
-| 6   |  salary_currency| [deprecated] |   The currency in which the salary is denominated (e.g., USD).    |
-| 7   |  salary_in_usd| numerical (predicted) |    The salary converted to US dollars for standardization purposes.   |
+| 5   |  salary| [❌deprecated] |    The salary of the employee in the local currency (e.g., 202,730 USD).   |
+| 6   |  salary_currency| [❌deprecated] |   The currency in which the salary is denominated (e.g., USD).    |
+| 7   |  salary_in_usd| numerical <br> (🔍predicted) |    The salary converted to US dollars for standardization purposes.   |
 | 8   |  employee_residence| nominal |    The country of residence of the employee.   |
 | 9   |  remote_ratio| ordinal |    The ratio indicating the extent of remote work allowed in the position (0 for no remote work, 1 for fully remote).   |
 | 10   |  company_location| nominal |    The location of the company where the employee is employed.   |
@@ -84,7 +84,14 @@ After target encoding, we use [ggcorrplot](https://cran.r-project.org/web/packag
 ``` r
 library(ggcorrplot)
 correlation_matrix <- cor(data %>% select(-salary_in_usd))
-ggcorrplot(correlation_matrix, lab = T)
+ggcorrplot(correlation_matrix, lab = T)+
+  labs(title = "correlation matrix",
+       x = "",
+       y = "")+
+  theme_bw()+
+  theme(axis.text.x = element_text("BL", "bold", "black", size = 10, angle = 45, hjust = 1),
+        axis.text.y = element_text("BL", "bold", "black", size = 10, hjust = 1),
+        title = element_text("BL", "bold", size = 10))
 ```
 
 ### Training
@@ -95,8 +102,18 @@ ggcorrplot(correlation_matrix, lab = T)
 - Functions for creating ensembles of caret models: caretList() and caretStack(). caretList() is a convenience function for fitting multiple caret::train() models to the same dataset. caretStack() will make linear or non-linear combinations of these models, using a caret::train() model as a meta-model, and caretEnsemble() will make a robust linear combination of models using a GLM.
 
 4. We also use cross-validation (5-fold) and grid search to find the best hyperparameters.
-5. We use MAE and RMSE to evaluate the performance of model.
+5. We use **RMSE of salary_in_usd** to evaluate the performance of model.
 
+- null model: use linear regression(only intercept)
+```r
+null_model <- lm(salary_in_usd~1, data = train_data)
+summary(null_model)
+
+null_rmse <- RMSE(train_data$salary_in_usd %>% arcsignedlog10,
+                  null_model$fitted.values %>% arcsignedlog10)
+```
+
+- ensemble model = random forest + gradient boosting
 ``` r
 library(randomForest)
 library(gbm)
@@ -115,67 +132,74 @@ ctrl <- trainControl(
 )
 
 # grid search
-param_grid <- expand.grid(
+rf_grid <- expand.grid(
+  mtry = c(2)
+)
+
+gbm_grid <- expand.grid(
   n.trees = 150,
-  interaction.depth = 5,
+  interaction.depth = 3,
   shrinkage = 0.1,
   n.minobsinnode = 10
 )
 
-# model
-model <- caretList(
+# model_list
+model_list <- caretList(
   salary_in_usd~.,
   data = train_data, 
   metric = "RMSE",
   verbose = T,
   trControl = ctrl,
   tuneList = list(
-    rf = caretModelSpec("rf", tuneGrid = data.frame(mtry = 2)),
-    gbm = caretModelSpec("gbm", tuneGrid = param_grid)
+    rf = caretModelSpec("rf", tuneGrid = rf_grid),
+    gbm = caretModelSpec("gbm", tuneGrid = gbm_grid)
   )
 )
 
 # ensemble model
-ens_model <- caretEnsemble(model)
+ens_model <- caretEnsemble(model_list)
 ```
 
 ### Feature Importance
 
-dataframe
+| feature_name	| overall	| rf	| gbm |
+|---|---|---|---|
+| job_title👑	| 41.94337184	| 41.65463988	| 44.24573465 |
+| employee_residence	| 29.53998588	| 29.47609937	| 30.04942006 |
+| experience_level	| 25.94155302	| 26.09243964	| 24.73837574 |
+| company_size	| 1.397332208	| 1.513988644	| 0.467108035 |
+| remote_ratio	| 1.177757053	| 1.262832468	| 0.499361506 |
+| employment_type	| 0	| 0	| 0 |
 
 ### Measurement
 
-| Train / Test   | MAE        | RMSE             |
-|--------|-----------|----------------------|
-| Train | 0 | 0      |
+| Train / Test           | RMSE             |
+|--------|----------------------|
+| Train  | 46728.5916975186       |
 
 scatter plot: true vs pred
 
 ### Prediction
 
-| Train / Test   | MAE        | RMSE             |
-|--------|-----------|----------------------|
-| Test | 0 | 0       |
+| Train / Test         | RMSE             |
+|--------|----------------------|
+| Test | 47087.3351748348        |
 
 scatter plot: true vs pred
 
-### Compare with Kaggle
+### Compare with other results on Kaggle
 1. Our Performance👑
 
-| Train / Test   | MAE        | RMSE             |
-|--------|-----------|----------------------|
-| Train | 0 | 0      |
-| Test | 0 | 0       |
+| Train / Test           | RMSE             |
+|--------|----------------------|
+| Train |  46728.5916975186      |
+| Test |  47087.3351748348        |
 
 2. [AIML salaries 2022-2024 AutoViz+CatBoost+SHAP](https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap)
 
 - RMSE score for train 51.4 kUSD/year, and for test 52.0 kUSD/year
 
 3. [Neural Network Regression Models](https://www.kaggle.com/code/samuelmason23/neural-network-regression-models)
-
-- train MAE: 40320.1875
-
-- test MAE: 40320.18831030768
 
 - test RMSE: 57857.07162184822
 
