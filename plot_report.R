@@ -29,7 +29,7 @@ salaries_box_plot <- function(df, feature, top_num=NULL) {
   
   df_top[[feature]] <- factor(df_top[[feature]], levels = top_feature[[feature]])
   
-  ggplot(df_top, aes(x = get(feature), y = salary_in_usd)) +
+  plot <- ggplot(df_top, aes(x = get(feature), y = salary_in_usd)) +
     geom_boxplot(fill = "lightgrey", alpha = 0.7) +
     labs(title = paste("Boxplot of Salary in USD by", feature),
          x = feature,
@@ -37,6 +37,7 @@ salaries_box_plot <- function(df, feature, top_num=NULL) {
     scale_y_continuous(labels = scales::comma) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+  return(plot)
 }
 
 salaries_box_plot(df, "job_title", 20)
@@ -67,7 +68,7 @@ salaries_bar_plot <- function(df, feature, top_num=NULL) {
   
   avg_salaries[[feature]] <- factor(avg_salaries[[feature]], levels = avg_salaries[[feature]])
   
-  ggplot(avg_salaries, aes_string(x =feature, y = "salary_in_usd")) +
+  plot <- ggplot(avg_salaries, aes_string(x =feature, y = "salary_in_usd")) +
     geom_bar(stat = "identity", fill = "yellow", color = "black", alpha = 0.8) +
     labs(title = paste("Bar Plot of Average Salary in USD by", feature),
          x = feature,
@@ -75,6 +76,8 @@ salaries_bar_plot <- function(df, feature, top_num=NULL) {
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
     scale_y_continuous(labels = scales::comma)
+  
+  return(plot)
 }
 
 salaries_bar_plot(df, "job_title", 20)
