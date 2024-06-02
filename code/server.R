@@ -6,7 +6,7 @@ server <- function(input, output) {
   observe({
     showModal(modalDialog(
       title = "Let predict salary together!",
-      HTML("Hi everyone, We are group one! <br>
+      HTML("Hi everyone, We are group 2! <br>
              The project focus on the salary of the positions in data field.<br> 
              Hope you have a great day and enojoy our result!"),
       easyClose = TRUE,
@@ -75,6 +75,6 @@ server <- function(input, output) {
   
   # Original Data
   output$ordinal_data <- DT::renderDataTable({
-    DT::datatable(data, options = list(pageLength = 100))
+    DT::datatable(data, options = list(pageLength = 50))
   })
 }
