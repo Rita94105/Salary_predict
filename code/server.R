@@ -1,9 +1,10 @@
+source('function.R')
 library(ggplot2)
 
 server <- function(input, output) {
-  bs_themer()
+  #bs_themer()
   
-  observe({
+  'observe({
     showModal(modalDialog(
       title = "Let predict salary together!",
       HTML("Hi everyone, We are group 2! <br>
@@ -12,53 +13,12 @@ server <- function(input, output) {
       easyClose = TRUE,
       footer = NULL
     ))
-  })
+  })'
 
   #data <- read.csv("../Data/salaries.csv")
   
   # use when publish on Shinyapps
   data <- read.csv("salaries.csv")
-  
-  # salary distribution
-  output$salary_bar <- renderPlot({
-    ggplot(data, aes(x = salary_in_usd)) +
-      geom_histogram(binwidth = 50000, fill = "#ffce67", color = "black") +
-      labs(x = "Salary in USD",
-           y = "Frequency") +
-      scale_x_continuous(labels = scales::comma) +
-      theme_minimal()
-  })
-  
-  #work experience distribution
-  output$work_bar <- renderPlot({
-    ggplot(data, aes(x = experience_level)) +
-      geom_bar(fill = "#E9ECEF", color = "black") +
-      labs(title = "Distribution of Experience Levels",
-           x = "Experience Level",
-           y = "Count") +
-      theme_minimal()
-  })
-  
-  #Experience Level vs Salary in USD
-  output$experience_salary <- renderPlot({
-    data$experience_level_factor <- factor(data$experience_level, levels = c("EN", "MI", "SE", "EX"))
-    ggplot(data, aes(x = experience_level_factor, y = salary_in_usd)) +
-      geom_boxplot() +
-      labs(x = "Experience Level",
-           y = "Salary in USD") +
-      scale_y_continuous(labels = scales::comma) +
-      theme_minimal()
-  })
-  
-  #Remote Ratio vs Salary in USD
-  output$remote_salary <- renderPlot({
-    ggplot(data, aes(x = factor(remote_ratio), y = salary_in_usd)) +
-      geom_boxplot() +
-      labs(x = "Remote Ratio",
-           y = "Salary in USD") +
-      scale_y_continuous(labels = scales::comma) +
-      theme_minimal()
-  })
   
   # Compute values for value boxes
   output$job_title <- renderText({
@@ -72,6 +32,176 @@ server <- function(input, output) {
   output$average_salary <- renderText({
       sum(data$salary_in_usd) / nrow(data)
     })
+  
+  # Salary Distribution
+  output$salary_distribution <- renderPlot({
+    feature <- input$feature
+    formula <- as.formula(paste("salary_in_usd ~", feature))  
+    
+    median_salaries <- aggregate(formula, data = data, median)
+    median_salaries <- median_salaries[order(-median_salaries$salary_in_usd), ]
+    
+    if (feature %in% c("job_title", "employee_residence")) {
+      top_feature <- median_salaries[1:20, ]
+    } else {
+      top_feature <- median_salaries
+      
+    }
+    data_top <- data[data[[feature]] %in% top_feature[[feature]], ]
+    
+    data_top[[feature]] <- factor(data_top[[feature]], levels = top_feature[[feature]])
+    
+    plot <- ggplot(data_top, aes(x = get(feature), y = salary_in_usd)) +
+      geom_boxplot(fill = "lightgrey", alpha = 0.7) +
+      labs(title = paste("Boxplot of Salary in USD by", feature),
+           x = feature,
+           y = "Salary in USD") +
+      scale_y_continuous(labels = scales::comma) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+    return(plot)
+  })
+  
+  # Salary Average
+  output$salary_average <- renderPlot({
+    feature <- input$feature
+    formula <- as.formula(paste("salary_in_usd ~", feature)) 
+    
+    avg_salaries <- aggregate(formula, data = data, FUN = mean)
+    colnames(avg_salaries)[1] <- feature
+    
+    if (feature %in% c("job_title", "employee_residence")) {
+      avg_salaries <- avg_salaries[order(-avg_salaries$salary_in_usd), ][1:20, ]
+    } else {
+      avg_salaries <- avg_salaries[order(-avg_salaries$salary_in_usd), ]
+    }
+    
+    avg_salaries[[feature]] <- factor(avg_salaries[[feature]], levels = avg_salaries[[feature]])
+    
+    plot <- ggplot(avg_salaries, aes_string(x =feature, y = "salary_in_usd")) +
+      geom_bar(stat = "identity", fill = "yellow", color = "black", alpha = 0.8) +
+      labs(title = paste("Bar Plot of Average Salary in USD by", feature),
+           x = feature,
+           y = "Average Salary in USD") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+      scale_y_continuous(labels = scales::comma)
+    
+    return(plot)
+  })
+  
+  # Histogram of Salary Distribution
+  output$histogram_salary_in_usd <- renderPlot({
+    plot <- ggplot(data, aes(x = salary_in_usd)) +
+      geom_histogram(binwidth = 20000, fill = "orange", color = "black", alpha = 0.7) +
+      labs(x = "Salary in USD",
+           y = "Frequency") +
+      theme_minimal() +
+      scale_x_continuous(labels = scales::comma)
+    scale_y_continuous(labels = scales::comma)
+    
+    return(plot)
+  })
+  
+  #Histogram of Log Salary in USD
+  output$salary_in_log <- renderPlot({
+    log_df <- data
+    log_df$salary_in_log <- log(log_df$salary_in_usd)
+    log_df$sin_log_salary <- sin(log_df$salary_in_log)
+    
+    plot <- ggplot(log_df, aes(x = salary_in_log)) +
+      geom_histogram(bins = 20, fill = "lightblue", color = "black", alpha = 0.7) +
+      labs(x = "Log Salary in USD",
+           y = "Frequency") +
+      theme_minimal() +
+      scale_y_continuous(labels = scales::comma)
+    
+    return(plot)
+  })
+  
+  # Step 1: Checking the type of data
+  output$step1_summary <- renderPrint({
+    cat("summary(data)\n\n")
+    summary(data)
+  })
+  
+  output$step1_str <- renderPrint({
+    cat("str(data)\n\n")
+    str(data)
+  })
+  
+  # Step 2: Checking data distribution
+  output$step2 <- renderPrint({
+    cat("class_distribution <- table(data$company_size)\n")
+    table(data$company_size)
+  })
+  
+  # Step 3: Checking missing values
+  output$step3 <- renderPrint({
+    cat("missing_values <- colSums(is.na(data))\n\n")
+    colSums(is.na(data))
+  })
+  
+  # Step 4: Checking Outliers
+  output$step4 <- renderPrint({
+    cat("boxplot(data$salary_in_usd, main = \"Boxplot\")")
+  })
+  
+  output$step4_plot <- renderPlot({
+    boxplot(data$salary_in_usd, main = "Boxplot")
+  })
+  
+  output$step4_process <- renderPrint({
+    cat("data <- process_outliers(data, c(\"salary_in_usd\"))\n\n")
+    data <- process_outliers(data, c("salary_in_usd"))
+  })
+  
+  # Step 5: Checking the duplicate data
+  output$step5_1 <- renderPrint({
+    cat("experience_levels <- c(\"EN\", \"MI\", \"SE\", \"EX\")",
+        "data <- ordinal_encoding(data, \"experience_level\", \"experience_level_encoded\", experience_levels)\n",
+        sep = "\n")
+    experience_levels <- c("EN", "MI", "SE", "EX")
+    data <- ordinal_encoding(data, "experience_level", "experience_level_encoded", experience_levels)
+    data$experience_level_encoded
+  })
+  
+  output$step5_2 <- renderPrint({
+    cat("company_size_levels <- c(\"S\", \"M\", \"L\")\n",
+        "data <- ordinal_encoding(data, \"company_size\", \"company_size_encoded\", company_size_levels)",
+        sep = "\n")
+    company_size_levels <- c("S", "M", "L")
+    data <- ordinal_encoding(data, "company_size", "company_size_encoded", company_size_levels)
+    data$company_size_encoded
+  })
+  
+  # Step 6: Target Encoding
+  output$step6 <- renderPrint({
+    cat("data$employment_type_encoded <-target_encoding(data, \"employment_type\", target_encode_col_name)",
+        "data$job_title_encoded <- target_encoding(data, \"job_title\", target_encode_col_name)",
+        "data$employee_residence_encoded <- target_encoding(data, \"employee_residence\", target_encode_col_name)",
+        "data$company_location_encoded <- target_encoding(data, \"company_location\", target_encode_col_name",
+        sep = "\n\n")
+  })
+  
+  # Step 7: One-hot Encoding
+  output$step7 <- renderPrint({
+    cat("cols_encoding <- c(\"experience_level\",\"employment_type\",\"job_title\",\"employee_residence\",\"company_location\",\"company_size\")",
+        "for (col in cols_encoding) {",
+        "  data <- do_one_hot_encoding(data, col)",
+        "}",
+        sep = "\n\n")
+  })
+  
+  # Step 8: Splitting the data into training and testing sets
+  output$step8 <- renderPrint({
+    cat("data$salary_in_usd_cluster <- do_kmeans(data, 10)\n")
+  })
+  
+  output$function_code <- renderPrint({
+    file <- "function.R"
+    cat(readLines(file), sep = "\n")
+  })
   
   # Original Data
   output$ordinal_data <- DT::renderDataTable({

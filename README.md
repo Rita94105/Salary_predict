@@ -58,13 +58,121 @@ We try to use these features of the dataset to predict the salaries of data scie
 ### Process
 
 1.  Checking the type of data
-2.  Dropping the duplicate data
-3.  Counting the number of rows
-4.  Dropping the missing or null value
-5.  Detecting outliers
-6.  SMOTE
-7.  Ordinal Encoding
-8.  Target Encoding
+```
+summary(data)
+str(data)
+```
+2.  Checking data distribution
+```
+class_distribution <- table(data$company_size)
+```
+3.  Checking the missing or null value
+```
+missing_counts <- colSums(is.na(data))
+```
+4.  Checking Outliers
+```
+boxplot(data$salary_in_usd, main = "Boxplot")
+
+process_outliers <- function(data, columns) {
+  for (col in columns) {
+    Q1 <- quantile(data[[col]], 0.25, na.rm = TRUE)
+    Q3 <- quantile(data[[col]], 0.75, na.rm = TRUE)
+    IQR <- Q3 - Q1
+    lower_bound <- Q1 - 1.5 * IQR
+    upper_bound <- Q3 + 1.5 * IQR
+    
+    median_val <- median(data[[col]], na.rm = TRUE)
+    
+    print(paste("---", col))
+    print(paste("lower bound:",lower_bound))
+    print(paste("upper bound:", upper_bound))
+    print(paste("median", median_val))
+    outliers <- data[[col]][data[[col]] < lower_bound | data[[col]] > upper_bound]
+    print(paste("outliers count:", length(outliers)))
+    
+    data[[col]][data[[col]] < lower_bound] <- median_val
+    data[[col]][data[[col]] > upper_bound] <- median_val
+    
+    outliers_after <- data[[col]][data[[col]] < lower_bound | data[[col]] > upper_bound]
+    print(paste("outliers_after count:", length(outliers_after)))
+    
+  }
+  return(data)
+}
+
+data <- process_outliers(data, c("salary_in_usd"))
+```
+5.  Ordinal Encoding
+```
+# ordinal: experience_level, company_size
+
+ordinal_encoding <- function(data, old_col, new_col, order) {
+  data[[new_col]] <- factor(data[[old_col]], levels = order, ordered = TRUE)
+  data[[new_col]] <- as.numeric(data[[new_col]])
+  return(data)
+}
+
+experience_levels <- c("EN", "MI", "SE", "EX")
+data <- ordinal_encoding(data, "experience_level", "experience_level_encoded", experience_levels)
+data$experience_level_encoded
+
+company_size_levels <- c("S", "M", "L")
+data <- ordinal_encoding(data, "company_size", "company_size_encoded", company_size_levels)
+data$company_size_encoded
+```
+6.  Target Encoding
+```
+target_encoding <- function(data, col, target) {
+  target_encode_tmp <- build_target_encoding(data, cols_to_encode = col,
+                                           target_col = target, functions = c("mean"))
+  encode_result <- target_encode(data, target_encoding = target_encode_tmp)
+  return(encode_result[[length(encode_result)]])
+}
+
+# employment_type: Target encoding
+data$employment_type_encoded <-target_encoding(data, "employment_type", target_encode_col_name)
+
+# job_title: Target encoding
+data$job_title_encoded <- target_encoding(data, "job_title", target_encode_col_name)
+
+# employee_residence: Target encoding
+data$employee_residence_encoded <- target_encoding(data, "employee_residence", target_encode_col_name)
+
+# company_location: Target encoding
+data$company_location_encoded <- target_encoding(data, "company_location", target_encode_col_name)
+```
+7.  One-hot Encoding
+```
+cols_encoding <- c("experience_level","employment_type","job_title","employee_residence",
+                   "company_location","company_size")
+                   
+do_one_hot_encoding <- function(data, col_name) {
+  category_name <- col_name
+  formula_str <- paste("~", category_name, "- 1")
+  formula_obj <- as.formula(formula_str)
+  encoded_df <- model.matrix(formula_obj, data = data)
+  colnames(encoded_df) <- make.names(colnames(encoded_df))
+  
+  combined_data <- cbind(data, encoded_df)
+  return(combined_data)
+}
+
+for (col in cols_encoding) {
+  data <- do_one_hot_encoding(data, col)
+}
+```
+8.  Splitting the data into training and testing sets
+```
+do_kmeans <- function(data, cluster_count) {
+  k <- cluster_count
+  kmeans_result <- kmeans(data$salary_in_usd, centers = k)
+  return(as.factor(kmeans_result$cluster))
+}
+
+data$salary_in_usd_cluster <- do_kmeans(data, 10)
+colnames(data)
+```
 9.  function signedlog10(): transform our prediction target.
 ``` r
 # sin log function

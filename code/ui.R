@@ -3,6 +3,7 @@ library(bslib)
 library(bsicons)
 
 source("ui_data.R")
+source("ui_data_preprocessing.R")
 
 footer_ui <- function() {
   div(class = "footer",
@@ -18,9 +19,8 @@ ui <- navbarPage(
   navbarMenu(
     title = "Data Exploration",
     tabPanel("Introduction", data_ui()),
+    tabPanel("Data Preprocessing", data_preprocessing_ui()),
     tabPanel("Original Data", original_data_ui()),
-    tabPanel("Cleaned Data", "Tab content 3")
-    #相關性矩陣、
   ),
   navbarMenu(
     title = "Training and Prediction",
