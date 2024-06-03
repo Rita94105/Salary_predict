@@ -1,0 +1,246 @@
++ Fold1: parameter=none 
+- Fold1: parameter=none 
++ Fold2: parameter=none 
+- Fold2: parameter=none 
++ Fold3: parameter=none 
+- Fold3: parameter=none 
++ Fold4: parameter=none 
+- Fold4: parameter=none 
++ Fold5: parameter=none 
+- Fold5: parameter=none 
+Aggregating results
+Fitting final model on full training set
+Non-Informative Model 
+
+13164 samples
+    7 predictor
+    2 classes: 'X0', 'X1' 
+
+No pre-processing
+Resampling: Cross-Validated (5 fold) 
+Summary of sample sizes: 10531, 10531, 10531, 10532, 10531 
+Resampling results:
+
+  ROC  Sens  Spec
+  0.5  0     1   
+
++ Fold1: mtry=2 
+- Fold1: mtry=2 
++ Fold2: mtry=2 
+- Fold2: mtry=2 
++ Fold3: mtry=2 
+- Fold3: mtry=2 
++ Fold4: mtry=2 
+- Fold4: mtry=2 
++ Fold5: mtry=2 
+- Fold5: mtry=2 
+Aggregating results
+Fitting final model on full training set
++ Fold1: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3529             nan     0.1000    0.0163
+     2        1.3229             nan     0.1000    0.0151
+     3        1.3006             nan     0.1000    0.0103
+     4        1.2817             nan     0.1000    0.0095
+     5        1.2655             nan     0.1000    0.0074
+     6        1.2485             nan     0.1000    0.0080
+     7        1.2341             nan     0.1000    0.0071
+     8        1.2239             nan     0.1000    0.0048
+     9        1.2129             nan     0.1000    0.0051
+    10        1.2043             nan     0.1000    0.0043
+    20        1.1531             nan     0.1000    0.0015
+    40        1.1149             nan     0.1000    0.0003
+    60        1.0970             nan     0.1000    0.0001
+    80        1.0860             nan     0.1000   -0.0001
+   100        1.0797             nan     0.1000   -0.0000
+   120        1.0739             nan     0.1000    0.0000
+   140        1.0705             nan     0.1000   -0.0002
+   160        1.0678             nan     0.1000   -0.0001
+   180        1.0656             nan     0.1000   -0.0002
+   200        1.0635             nan     0.1000   -0.0001
+
+- Fold1: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold2: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3523             nan     0.1000    0.0164
+     2        1.3218             nan     0.1000    0.0150
+     3        1.2993             nan     0.1000    0.0111
+     4        1.2820             nan     0.1000    0.0091
+     5        1.2614             nan     0.1000    0.0095
+     6        1.2455             nan     0.1000    0.0076
+     7        1.2338             nan     0.1000    0.0059
+     8        1.2236             nan     0.1000    0.0048
+     9        1.2140             nan     0.1000    0.0046
+    10        1.2041             nan     0.1000    0.0048
+    20        1.1501             nan     0.1000    0.0018
+    40        1.1114             nan     0.1000    0.0002
+    60        1.0931             nan     0.1000   -0.0000
+    80        1.0839             nan     0.1000   -0.0001
+   100        1.0780             nan     0.1000   -0.0001
+   120        1.0735             nan     0.1000   -0.0002
+   140        1.0701             nan     0.1000   -0.0001
+   160        1.0678             nan     0.1000   -0.0002
+   180        1.0657             nan     0.1000   -0.0002
+   200        1.0643             nan     0.1000   -0.0002
+
+- Fold2: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold3: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3536             nan     0.1000    0.0164
+     2        1.3263             nan     0.1000    0.0135
+     3        1.3007             nan     0.1000    0.0125
+     4        1.2820             nan     0.1000    0.0090
+     5        1.2670             nan     0.1000    0.0074
+     6        1.2538             nan     0.1000    0.0060
+     7        1.2392             nan     0.1000    0.0072
+     8        1.2298             nan     0.1000    0.0045
+     9        1.2183             nan     0.1000    0.0057
+    10        1.2111             nan     0.1000    0.0034
+    20        1.1588             nan     0.1000    0.0016
+    40        1.1197             nan     0.1000    0.0004
+    60        1.1028             nan     0.1000   -0.0000
+    80        1.0930             nan     0.1000   -0.0001
+   100        1.0864             nan     0.1000   -0.0000
+   120        1.0817             nan     0.1000   -0.0001
+   140        1.0778             nan     0.1000   -0.0001
+   160        1.0750             nan     0.1000   -0.0002
+   180        1.0724             nan     0.1000   -0.0001
+   200        1.0704             nan     0.1000   -0.0001
+
+- Fold3: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold4: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3540             nan     0.1000    0.0156
+     2        1.3262             nan     0.1000    0.0130
+     3        1.3010             nan     0.1000    0.0123
+     4        1.2800             nan     0.1000    0.0099
+     5        1.2632             nan     0.1000    0.0085
+     6        1.2490             nan     0.1000    0.0068
+     7        1.2371             nan     0.1000    0.0058
+     8        1.2284             nan     0.1000    0.0043
+     9        1.2185             nan     0.1000    0.0047
+    10        1.2110             nan     0.1000    0.0036
+    20        1.1629             nan     0.1000    0.0011
+    40        1.1251             nan     0.1000    0.0003
+    60        1.1084             nan     0.1000    0.0003
+    80        1.0997             nan     0.1000    0.0000
+   100        1.0933             nan     0.1000   -0.0001
+   120        1.0889             nan     0.1000   -0.0002
+   140        1.0858             nan     0.1000   -0.0002
+   160        1.0828             nan     0.1000   -0.0002
+   180        1.0804             nan     0.1000   -0.0002
+   200        1.0782             nan     0.1000   -0.0001
+
+- Fold4: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold5: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3504             nan     0.1000    0.0178
+     2        1.3237             nan     0.1000    0.0132
+     3        1.3028             nan     0.1000    0.0104
+     4        1.2848             nan     0.1000    0.0092
+     5        1.2654             nan     0.1000    0.0091
+     6        1.2526             nan     0.1000    0.0065
+     7        1.2383             nan     0.1000    0.0069
+     8        1.2279             nan     0.1000    0.0052
+     9        1.2188             nan     0.1000    0.0044
+    10        1.2091             nan     0.1000    0.0045
+    20        1.1567             nan     0.1000    0.0011
+    40        1.1160             nan     0.1000    0.0004
+    60        1.0992             nan     0.1000   -0.0000
+    80        1.0888             nan     0.1000   -0.0001
+   100        1.0824             nan     0.1000   -0.0000
+   120        1.0784             nan     0.1000   -0.0000
+   140        1.0748             nan     0.1000   -0.0002
+   160        1.0720             nan     0.1000   -0.0002
+   180        1.0696             nan     0.1000   -0.0002
+   200        1.0681             nan     0.1000   -0.0003
+
+- Fold5: n.trees=200, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Aggregating results
+Fitting final model on full training set
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1        1.3538             nan     0.1000    0.0163
+     2        1.3284             nan     0.1000    0.0130
+     3        1.3060             nan     0.1000    0.0112
+     4        1.2834             nan     0.1000    0.0110
+     5        1.2654             nan     0.1000    0.0089
+     6        1.2506             nan     0.1000    0.0074
+     7        1.2381             nan     0.1000    0.0061
+     8        1.2281             nan     0.1000    0.0049
+     9        1.2176             nan     0.1000    0.0051
+    10        1.2084             nan     0.1000    0.0044
+    20        1.1576             nan     0.1000    0.0015
+    40        1.1205             nan     0.1000    0.0004
+    60        1.1028             nan     0.1000    0.0002
+    80        1.0919             nan     0.1000   -0.0000
+   100        1.0856             nan     0.1000   -0.0000
+   120        1.0805             nan     0.1000    0.0001
+   140        1.0775             nan     0.1000   -0.0000
+   160        1.0752             nan     0.1000   -0.0001
+   180        1.0726             nan     0.1000   -0.0001
+   200        1.0705             nan     0.1000   -0.0001
+
+$everything
+ 使用者    系統    流逝 
+1012.58    2.08 1016.47 
+
+$final
+使用者   系統   流逝 
+236.20   0.23 236.96 
+
+$everything
+使用者   系統   流逝 
+236.44   0.83 237.68 
+
+$final
+使用者   系統   流逝 
+ 46.11   0.16  46.27 
+
+  mtry
+1    2
+  n.trees interaction.depth shrinkage n.minobsinnode
+1     200                 5       0.1             10
+        ROC      Sens      Spec Resample
+1 0.7482538 0.1219512 0.9909160    Fold1
+2 0.7325722 0.1532012 0.9788039    Fold2
+3 0.7551003 0.1447068 0.9924300    Fold3
+4 0.7661582 0.1440549 0.9931818    Fold4
+5 0.7642958 0.1074695 0.9909091    Fold5
+        ROC      Sens      Spec Resample
+1 0.7863572 0.6570122 0.7850114    Fold1
+2 0.7799036 0.6478659 0.7812263    Fold2
+3 0.7969764 0.6633663 0.7842544    Fold3
+4 0.8070489 0.6814024 0.8022727    Fold4
+5 0.7914862 0.6554878 0.8045455    Fold5
+[1] 0.7258432
+[1] 0.7136499
+                              Feature Importance
+job_title                   job_title 47.5522620
+experience_level     experience_level 27.4720461
+employee_residence employee_residence 14.9316890
+company_location     company_location  6.5968845
+company_size             company_size  1.8503477
+remote_ratio             remote_ratio  1.4091705
+employment_type       employment_type  0.1876002
+                                                                 feature_name    overall          rf        gbm
+experience_levelSE                                         experience_levelSE 17.6971656 12.51777284 18.5042195
+job_titleData Analyst                                   job_titleData Analyst 16.2188250 12.36948770 16.8186295
+employee_residenceUS                                     employee_residenceUS 12.4579348 10.30342720 12.7936506
+experience_levelEX                                         experience_levelEX  7.4644081  1.65633677  8.3694229
+job_titleMachine Learning Engineer         job_titleMachine Learning Engineer  6.0876812  7.45159079  5.8751565
+company_locationUS                                         company_locationUS  2.5376812  9.92898248  1.3859672
+company_locationCA                                         company_locationCA  2.4194213  0.27926027  2.7529016
+job_titleResearch Scientist                       job_titleResearch Scientist  2.3991756  1.47229328  2.5436025
+experience_levelMI                                         experience_levelMI  2.3104725  6.58341743  1.6446614
+job_titleData Manager                                   job_titleData Manager  2.1524265  1.36220138  2.2755595
+company_sizeM                                                   company_sizeM  1.5232323  0.84376651  1.6291068
+job_titleData Science Consultant             job_titleData Science Consultant  1.4866644  0.60262142  1.6244161
+job_titleApplied Scientist                         job_titleApplied Scientist  1.4001780  0.85266136  1.4854922
+job_titleData Engineer                                 job_titleData Engineer  1.1033183  0.05455300  1.2667371
+remote_ratio100                                               remote_ratio100  1.0662538  0.09001106  1.2183721
+job_titleBusiness Intelligence Analyst job_titleBusiness Intelligence Analyst  1.0091142  0.70242087  1.0569032
+job_titleML Engineer                                     job_titleML Engineer  0.9839697  0.56717735  1.0489143
+job_titleData Scientist                               job_titleData Scientist  0.9791438  1.02774280  0.9715711
+job_titleMachine Learning Scientist       job_titleMachine Learning Scientist  0.9682321  0.34500761  1.0653430
+job_titleResearch Engineer                         job_titleResearch Engineer  0.9210517  0.50804878  0.9854059
+[1] "====================================================================="

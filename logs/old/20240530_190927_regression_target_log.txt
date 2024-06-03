@@ -1,0 +1,297 @@
+2024-05-30 19:09:27 Use Target Encoding 
+2024-05-30 19:09:29 Import Packages Complete. 
+'data.frame':	16534 obs. of  11 variables:
+ $ work_year         : int  2024 2024 2024 2024 2024 2024 2024 2024 2024 2024 ...
+ $ experience_level  : chr  "SE" "SE" "SE" "SE" ...
+ $ employment_type   : chr  "FT" "FT" "FT" "FT" ...
+ $ job_title         : chr  "AI Engineer" "AI Engineer" "Data Engineer" "Data Engineer" ...
+ $ salary            : int  202730 92118 130500 96000 190000 160000 400000 65000 101520 45864 ...
+ $ salary_currency   : chr  "USD" "USD" "USD" "USD" ...
+ $ salary_in_usd     : int  202730 92118 130500 96000 190000 160000 400000 65000 101520 45864 ...
+ $ employee_residence: chr  "US" "US" "US" "US" ...
+ $ remote_ratio      : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ company_location  : chr  "US" "US" "US" "US" ...
+ $ company_size      : chr  "M" "M" "M" "M" ...
+
+    L     M     S 
+ 1040 15306   188 
+         work_year   experience_level    employment_type          job_title 
+                 0                  0                  0                  0 
+            salary    salary_currency      salary_in_usd employee_residence 
+                 0                  0                  0                  0 
+      remote_ratio   company_location       company_size 
+                 0                  0                  0 
+[1] "--- salary_in_usd"
+[1] "lower bound: -26037.5"
+[1] "upper bound: 313062.5"
+[1] "median 141300"
+[1] "outliers count: 283"
+[1] "outliers_after count: 0"
+[1] "build_target_encoding: Start to compute encoding for target_encoding according to col: salary_in_usd_double."
+[1] "target_encode: Start to encode columns according to target."
+[1] "build_target_encoding: Start to compute encoding for target_encoding according to col: salary_in_usd_double."
+[1] "target_encode: Start to encode columns according to target."
+[1] "build_target_encoding: Start to compute encoding for target_encoding according to col: salary_in_usd_double."
+[1] "target_encode: Start to encode columns according to target."
+[1] "build_target_encoding: Start to compute encoding for target_encoding according to col: salary_in_usd_double."
+[1] "target_encode: Start to encode columns according to target."
+2024-05-30 19:09:30 Data Preprocessing Complete. 
+2024-05-30 19:09:30 Start Model Training... 
++ Fold1: parameter=none 
+- Fold1: parameter=none 
++ Fold2: parameter=none 
+- Fold2: parameter=none 
++ Fold3: parameter=none 
+- Fold3: parameter=none 
++ Fold4: parameter=none 
+- Fold4: parameter=none 
++ Fold5: parameter=none 
+- Fold5: parameter=none 
+Aggregating results
+Fitting final model on full training set
+Non-Informative Model 
+
+13222 samples
+    7 predictor
+
+No pre-processing
+Resampling: Cross-Validated (5 fold) 
+Summary of sample sizes: 10578, 10578, 10576, 10578, 10578 
+Resampling results:
+
+  RMSE      Rsquared  MAE     
+  58459.21  NaN       46863.39
+
+2024-05-30 19:09:30 Null Model: 
+Non-Informative Model 
+
+13222 samples
+    7 predictor
+
+No pre-processing
+Resampling: Cross-Validated (5 fold) 
+Summary of sample sizes: 10578, 10578, 10576, 10578, 10578 
+Resampling results:
+
+  RMSE      Rsquared  MAE     
+  58459.21  NaN       46863.39
+
+=====================================================================
++ Fold1: mtry=2 
+- Fold1: mtry=2 
++ Fold2: mtry=2 
+- Fold2: mtry=2 
++ Fold3: mtry=2 
+- Fold3: mtry=2 
++ Fold4: mtry=2 
+- Fold4: mtry=2 
++ Fold5: mtry=2 
+- Fold5: mtry=2 
+Aggregating results
+Fitting final model on full training set
++ Fold1: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3240399923.3361             nan     0.1000 211164974.4745
+     2 3059552152.5002             nan     0.1000 174686225.6733
+     3 2912611624.6282             nan     0.1000 146542535.0053
+     4 2792997280.6387             nan     0.1000 117983008.6411
+     5 2696772532.6042             nan     0.1000 91738328.5876
+     6 2607045643.6916             nan     0.1000 84896967.0794
+     7 2540733705.3056             nan     0.1000 63832380.2385
+     8 2478984562.2654             nan     0.1000 62766294.1065
+     9 2427398793.3437             nan     0.1000 48068225.3424
+    10 2381268430.3003             nan     0.1000 45921050.8352
+    20 2181658039.0400             nan     0.1000 8495618.8151
+    40 2111824591.1973             nan     0.1000 68471.6398
+    60 2094837911.3589             nan     0.1000 -109252.0719
+    80 2084851735.3126             nan     0.1000 -313228.0412
+   100 2077058505.6534             nan     0.1000 -626968.5129
+   120 2070691288.2176             nan     0.1000 475022.9373
+   140 2066213033.4965             nan     0.1000 -99039.9335
+   150 2063653064.1324             nan     0.1000 -545280.6987
+
+- Fold1: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold2: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3208866539.8860             nan     0.1000 206047992.0154
+     2 3033021399.4572             nan     0.1000 179475331.4328
+     3 2892655161.1219             nan     0.1000 137124645.0673
+     4 2769997793.2569             nan     0.1000 114639374.0545
+     5 2669554327.8562             nan     0.1000 97270186.9980
+     6 2589186148.9226             nan     0.1000 77702131.7288
+     7 2522417378.2583             nan     0.1000 65544216.8230
+     8 2463598996.8615             nan     0.1000 57039658.2166
+     9 2414921024.6181             nan     0.1000 45844459.9875
+    10 2371897275.3731             nan     0.1000 41175314.5715
+    20 2176238641.0498             nan     0.1000 6619406.8705
+    40 2109733578.8288             nan     0.1000 623693.9932
+    60 2094547050.6732             nan     0.1000 -198710.6479
+    80 2084520337.1195             nan     0.1000 -677711.8701
+   100 2077172144.2172             nan     0.1000 -76784.9482
+   120 2071532926.2253             nan     0.1000 -433569.2597
+   140 2066579401.3392             nan     0.1000 -562529.0380
+   150 2064254772.6959             nan     0.1000 -795316.3704
+
+- Fold2: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold3: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3181666332.4166             nan     0.1000 207940705.3256
+     2 3012243335.6582             nan     0.1000 163276580.3031
+     3 2866063211.1211             nan     0.1000 144084665.6769
+     4 2749879341.8631             nan     0.1000 108918739.5714
+     5 2653145821.6391             nan     0.1000 94516103.0029
+     6 2576213914.6748             nan     0.1000 78716070.7305
+     7 2505250759.1661             nan     0.1000 71626723.0595
+     8 2447391269.8851             nan     0.1000 55765181.9906
+     9 2396758858.2064             nan     0.1000 47161327.4218
+    10 2356815417.0627             nan     0.1000 37924261.7447
+    20 2161961432.1802             nan     0.1000 5887379.3494
+    40 2093249221.9729             nan     0.1000 696664.5945
+    60 2078162275.2436             nan     0.1000 -148415.5348
+    80 2069627872.3709             nan     0.1000 -101513.2220
+   100 2061235009.9834             nan     0.1000 -769028.2446
+   120 2055532332.1011             nan     0.1000 -834227.8327
+   140 2051046734.5904             nan     0.1000 -505087.1322
+   150 2048545033.0688             nan     0.1000 -773444.4281
+
+- Fold3: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold4: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3222544333.3333             nan     0.1000 210578646.9656
+     2 3040306332.3798             nan     0.1000 176581034.8947
+     3 2900774224.4914             nan     0.1000 134769373.4084
+     4 2783764329.2213             nan     0.1000 118394437.6163
+     5 2681459166.7671             nan     0.1000 98016480.0532
+     6 2601144783.0861             nan     0.1000 80845480.4366
+     7 2534947686.7022             nan     0.1000 67383126.4635
+     8 2479318621.7169             nan     0.1000 55427378.9081
+     9 2426451101.8880             nan     0.1000 52257115.2045
+    10 2383423372.9542             nan     0.1000 42638516.4141
+    20 2184502799.5247             nan     0.1000 8917931.2018
+    40 2118605514.7763             nan     0.1000 395048.9440
+    60 2104240417.4652             nan     0.1000 -139172.1128
+    80 2095748879.0746             nan     0.1000 -334915.8437
+   100 2089585771.7775             nan     0.1000 -609918.8980
+   120 2084605650.0697             nan     0.1000 -740335.3067
+   140 2080745815.3240             nan     0.1000 -544703.4041
+   150 2079642145.9720             nan     0.1000 -733263.5813
+
+- Fold4: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
++ Fold5: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3186600446.7774             nan     0.1000 206132766.5011
+     2 3019569414.4944             nan     0.1000 167263764.9071
+     3 2880837027.4927             nan     0.1000 136261875.3667
+     4 2761756264.0020             nan     0.1000 118648740.8291
+     5 2661033700.9637             nan     0.1000 99229180.9903
+     6 2580300319.9315             nan     0.1000 81376103.2450
+     7 2513561000.7841             nan     0.1000 64553241.7998
+     8 2451655321.1304             nan     0.1000 58202759.8823
+     9 2403276248.1588             nan     0.1000 46507646.6962
+    10 2359687320.3066             nan     0.1000 39862011.8975
+    20 2164955662.4710             nan     0.1000 9422305.5532
+    40 2095876654.5727             nan     0.1000 74688.5603
+    60 2080834612.9285             nan     0.1000 208303.9792
+    80 2071201609.9888             nan     0.1000 -497064.4732
+   100 2064743159.2859             nan     0.1000 -576051.7194
+   120 2058758913.9373             nan     0.1000 -321463.4384
+   140 2054536720.5365             nan     0.1000 -788747.9598
+   150 2052595839.7395             nan     0.1000 -1344610.6246
+
+- Fold5: n.trees=150, interaction.depth=5, shrinkage=0.1, n.minobsinnode=10 
+Aggregating results
+Fitting final model on full training set
+Iter   TrainDeviance   ValidDeviance   StepSize   Improve
+     1 3208832456.5457             nan     0.1000 207718875.5430
+     2 3034469943.6271             nan     0.1000 174784659.6923
+     3 2886313192.9051             nan     0.1000 143543954.8600
+     4 2770624038.7164             nan     0.1000 114920422.7886
+     5 2671281684.5261             nan     0.1000 97255174.0079
+     6 2588896126.9032             nan     0.1000 79315505.8502
+     7 2520553017.7064             nan     0.1000 66394974.3988
+     8 2464172856.5981             nan     0.1000 56581266.9869
+     9 2414538943.0008             nan     0.1000 47441399.8328
+    10 2370861085.9797             nan     0.1000 40027300.0923
+    20 2175190762.0076             nan     0.1000 9462701.4093
+    40 2107982502.4527             nan     0.1000 348768.6018
+    60 2093609039.3065             nan     0.1000 9314.9395
+    80 2084709536.3228             nan     0.1000 -363435.1099
+   100 2076765862.1656             nan     0.1000 -66266.7496
+   120 2071345685.2141             nan     0.1000 -302427.7878
+   140 2067769304.3995             nan     0.1000 -583873.1528
+   150 2065258352.7265             nan     0.1000 -247902.1243
+
+=====================================================================
+2024-05-30 19:10:31 Ensemble Model: 
+A glm ensemble of 2 base models: rf, gbm
+
+Ensemble results:
+Generalized Linear Model 
+
+13222 samples
+    2 predictor
+
+No pre-processing
+Resampling: Bootstrapped (25 reps) 
+Summary of sample sizes: 13222, 13222, 13222, 13222, 13222, 13222, ... 
+Resampling results:
+
+  RMSE      Rsquared   MAE     
+  45876.17  0.3811562  36334.92
+
+$everything
+使用者   系統   流逝 
+ 52.67   1.20  54.39 
+
+$final
+使用者   系統   流逝 
+ 11.34   0.17  11.59 
+
+$everything
+使用者   系統   流逝 
+  4.95   0.08   5.11 
+
+$final
+使用者   系統   流逝 
+  0.84   0.03   0.89 
+
+  mtry
+1    2
+  n.trees interaction.depth shrinkage n.minobsinnode
+1     150                 5       0.1             10
+      RMSE  Rsquared      MAE Resample
+1 45721.02 0.3636903 36122.50    Fold1
+2 45874.32 0.3882658 36253.91    Fold2
+3 46520.29 0.3851948 36948.19    Fold3
+4 45212.61 0.3939411 36103.42    Fold4
+5 46379.90 0.3853734 36791.81    Fold5
+      RMSE  Rsquared      MAE Resample
+1 45765.30 0.3628759 36250.13    Fold1
+2 45873.74 0.3873859 36297.17    Fold2
+3 46382.58 0.3880390 36834.22    Fold3
+4 45301.68 0.3910109 36140.86    Fold4
+5 46335.64 0.3851278 36695.29    Fold5
+2024-05-30 19:10:31 RMSE: 
+2024-05-30 19:10:31 45850.322756704 
+2024-05-30 19:10:31 Model Training Complete. 
+2024-05-30 19:10:31 Model Prediction 
+2024-05-30 19:10:31 RMSE: 
+2024-05-30 19:10:31 45183.6931192759 
+2024-05-30 19:10:31 Feature Importance: 
+                              Feature Importance
+job_title                   job_title 43.0084819
+employee_residence employee_residence 23.2211319
+experience_level     experience_level 23.0164567
+company_location     company_location  8.9232868
+remote_ratio             remote_ratio  0.9250323
+company_size             company_size  0.9056103
+employment_type       employment_type  0.0000000
+                                         feature_name    overall        rf        gbm
+job_title_encoded                   job_title_encoded 43.0084819 41.931373 44.2815550
+employee_residence_encoded employee_residence_encoded 23.2211319 19.289335 27.8682634
+experience_level_encoded     experience_level_encoded 23.0164567 22.222790 23.9545199
+company_location_encoded     company_location_encoded  8.9232868 14.349913  2.5093631
+remote_ratio                             remote_ratio  0.9250323  0.895003  0.9605251
+company_size_encoded             company_size_encoded  0.9056103  1.311586  0.4257735
+employment_type_encoded       employment_type_encoded  0.0000000  0.000000  0.0000000
+=====================================================================

@@ -1,0 +1,31 @@
+2024-05-29 19:38:46 Import Packages Complete. 
+2024-05-29 19:39:31 Data Preprocessing Complete. 
+2024-05-29 19:39:31 Start Model Training... 
++ Fold1: parameter=none 
+- Fold1: parameter=none 
++ Fold2: parameter=none 
+- Fold2: parameter=none 
++ Fold3: parameter=none 
+- Fold3: parameter=none 
++ Fold4: parameter=none 
+- Fold4: parameter=none 
++ Fold5: parameter=none 
+- Fold5: parameter=none 
+Aggregating results
+Fitting final model on full training set
+2024-05-29 19:39:37 Null Model: 
+Non-Informative Model 
+
+13260 samples
+    7 predictor
+    2 classes: 'X0', 'X1' 
+
+No pre-processing
+Resampling: Cross-Validated (5 fold) 
+Summary of sample sizes: 10608, 10609, 10607, 10609, 10607 
+Resampling results:
+
+  ROC  Sens  Spec
+  0.5  1     0   
+
+=====================================================================
