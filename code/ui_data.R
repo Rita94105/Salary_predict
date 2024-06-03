@@ -12,8 +12,7 @@ data_ui <- function() {
             card_header("Introduction", class = "h6 text-primary"),
             p("In our Data Science course this semester, we were particularly intrigued by the current landscape of data science-related careers, specifically focusing on compensation trends."),
             p("To satisfy our curiosity and academic requirements, we decided to explore a relevant dataset found on Kaggle: Data Engineer Salary in 2024."),
-            p("Our accuracy is already significantly better than other results on Kaggle."),
-            p("However, this is a passable result. We need more data or features to optimize our model training to achieve results that most people can accept."),
+            p("Our accuracy is already significantly better than others on Kaggle!"),
             p("Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.")
           )
         )),

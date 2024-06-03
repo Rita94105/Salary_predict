@@ -173,7 +173,7 @@ do_kmeans <- function(data, cluster_count) {
 data$salary_in_usd_cluster <- do_kmeans(data, 10)
 colnames(data)
 ```
-9.  function signedlog10(): transform our prediction target.
+9.  Transforming Transforming the target variable
 ``` r
 # sin log function
 signedlog10 <- function(x) {

@@ -1,4 +1,5 @@
 library(smotefamily)
+library(dataPreparation)
 
 process_outliers <- function(data, columns) {
   for (col in columns) {

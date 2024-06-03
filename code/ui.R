@@ -4,6 +4,9 @@ library(bsicons)
 
 source("ui_data.R")
 source("ui_data_preprocessing.R")
+source("ui_training.R")
+source("ui_prediction.R")
+source("ui_code.R")
 
 footer_ui <- function() {
   div(class = "footer",
@@ -23,8 +26,10 @@ ui <- navbarPage(
     tabPanel("Original Data", original_data_ui()),
   ),
   navbarMenu(
-    title = "Training and Prediction",
-    tabPanel("Model", "Ensemble Model")
+    title = "Training and Prediction", 
+    tabPanel("Training",training_ui()),
+    tabPanel("Prediction",prediction_ui()),
+    tabPanel("Model Code", code_ui())
   ),
   footer_ui()
 )

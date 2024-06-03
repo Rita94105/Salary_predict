@@ -1,10 +1,13 @@
 source('function.R')
+
 library(ggplot2)
+library(ggcorrplot)
+library(readxl)
 
 server <- function(input, output) {
-  #bs_themer()
+  bs_themer()
   
-  'observe({
+  observe({
     showModal(modalDialog(
       title = "Let predict salary together!",
       HTML("Hi everyone, We are group 2! <br>
@@ -13,7 +16,7 @@ server <- function(input, output) {
       easyClose = TRUE,
       footer = NULL
     ))
-  })'
+  })
 
   #data <- read.csv("../Data/salaries.csv")
   
@@ -156,23 +159,17 @@ server <- function(input, output) {
     data <- process_outliers(data, c("salary_in_usd"))
   })
   
-  # Step 5: Checking the duplicate data
+  # Step 5: Ordinal Encoding
   output$step5_1 <- renderPrint({
     cat("experience_levels <- c(\"EN\", \"MI\", \"SE\", \"EX\")",
         "data <- ordinal_encoding(data, \"experience_level\", \"experience_level_encoded\", experience_levels)\n",
         sep = "\n")
-    experience_levels <- c("EN", "MI", "SE", "EX")
-    data <- ordinal_encoding(data, "experience_level", "experience_level_encoded", experience_levels)
-    data$experience_level_encoded
   })
   
   output$step5_2 <- renderPrint({
     cat("company_size_levels <- c(\"S\", \"M\", \"L\")\n",
         "data <- ordinal_encoding(data, \"company_size\", \"company_size_encoded\", company_size_levels)",
         sep = "\n")
-    company_size_levels <- c("S", "M", "L")
-    data <- ordinal_encoding(data, "company_size", "company_size_encoded", company_size_levels)
-    data$company_size_encoded
   })
   
   # Step 6: Target Encoding
@@ -198,8 +195,50 @@ server <- function(input, output) {
     cat("data$salary_in_usd_cluster <- do_kmeans(data, 10)\n")
   })
   
+  # Step 9: Transforming the target variable
+  output$step9 <- renderPrint({
+    cat("signedlog10 <- function(x) {",
+        "   ifelse(abs(x) <= 1, 0, sign(x) * log10(abs(x)))",
+        "}",
+        sep = "\n")
+  })
+  
+  # show function.R
   output$function_code <- renderPrint({
     file <- "function.R"
+    cat(readLines(file), sep = "\n")
+  })
+  
+  # training result
+  # training result
+  output$training_tabs <- renderUI({
+    file <- "model_details.xlsx"
+    sheets <- excel_sheets(file)
+    
+    do.call(tabsetPanel, lapply(sheets, function(sheet) {
+      tabPanel(
+        title = sheet,
+        DT::dataTableOutput(outputId = paste0("table_", sheet))
+      )
+    }))
+  })
+  
+  # Render each sheet as a DataTable
+  observe({
+    file <- "model_details.xlsx"
+    sheets <- excel_sheets(file)
+    
+    lapply(sheets, function(sheet) {
+      output[[paste0("table_", sheet)]] <- DT::renderDataTable({
+        data <- read_excel(file, sheet = sheet)
+        DT::datatable(data)
+      })
+    })
+  })
+  
+  # final_model code({
+  output$model_code <- renderPrint({
+    file <- "final_model.R"
     cat(readLines(file), sep = "\n")
   })
   
