@@ -5,12 +5,12 @@ library(ggcorrplot)
 library(readxl)
 
 server <- function(input, output) {
-  bs_themer()
+  #bs_themer()
   
   observe({
     showModal(modalDialog(
       title = "Let predict salary together!",
-      HTML("Hi everyone, We are group 2! <br>
+      HTML("Hi everyone, We are Group 2! <br>
              The project focus on the salary of the positions in data field.<br> 
              Hope you have a great day and enojoy our result!"),
       easyClose = TRUE,

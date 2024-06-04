@@ -1,6 +1,12 @@
 # [Data Engineer Salary Predict](https://rita94105.shinyapps.io/Salary_2024/)
 
-In our Data Science course this semester, we were particularly intrigued by the current landscape of data science-related careers, specifically focusing on compensation trends. To satisfy our curiosity and academic requirements, we decided to explore a relevant dataset found on Kaggle: "Data Engineer Salary in 2024."
+### Project Overview: Salary Prediction in the AI and Data Field
+
+Since the advent of ChatGPT, AI applications have flourished, driving a surge in demand for data-related positions. This phenomenon sparked our interest in the salary structures within the data industry. On Kaggle, we discovered a dataset on Data Engineer salaries, which led us to undertake a project aimed at predicting salary ranges in the data field based on features such as region, job title, years of experience, and company size.
+
+Our research findings indicate that job title is the most critical factor in determining salaries. This insight holds significant value for both job seekers and employers in the data field, aiding in career planning and recruitment strategies.
+
+This project not only reveals the factors influencing salaries in the data industry but also provides valuable information for those looking to enter the field, helping them make more informed career decisions.
 
 ## Contributors
 

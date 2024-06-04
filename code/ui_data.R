@@ -10,10 +10,9 @@ data_ui <- function() {
           width = 12,
           card(
             card_header("Introduction", class = "h6 text-primary"),
-            p("In our Data Science course this semester, we were particularly intrigued by the current landscape of data science-related careers, specifically focusing on compensation trends."),
-            p("To satisfy our curiosity and academic requirements, we decided to explore a relevant dataset found on Kaggle: Data Engineer Salary in 2024."),
-            p("Our accuracy is already significantly better than others on Kaggle!"),
-            p("Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.")
+            p("Since the advent of ChatGPT, AI applications have flourished, driving a surge in demand for data-related positions. This phenomenon sparked our interest in the salary structures within the data industry. On Kaggle, we discovered a dataset on Data Engineer salaries, which led us to undertake a project aimed at predicting salary ranges in the data field based on features such as region, job title, years of experience, and company size."),
+            p("Our research findings indicate that job title is the most critical factor in determining salaries. This insight holds significant value for both job seekers and employers in the data field, aiding in career planning and recruitment strategies."),
+            p("This project not only reveals the factors influencing salaries in the data industry but also provides valuable information for those looking to enter the field, helping them make more informed career decisions.")
           )
         )),
       fluidRow(

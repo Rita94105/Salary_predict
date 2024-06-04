@@ -5,7 +5,7 @@ account: rita94105
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12062706
-bundleId: 8695796
+bundleId: 8699804
 url: https://rita94105.shinyapps.io/Salary_2024/
 version: 1
 asMultiple: FALSE
