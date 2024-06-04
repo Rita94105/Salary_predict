@@ -143,6 +143,9 @@ data$employee_residence_encoded <- target_encoding(data, "employee_residence", t
 data$company_location_encoded <- target_encoding(data, "company_location", target_encode_col_name)
 ```
 7.  One-hot Encoding
+
+- During testing, it was found that One-hot Encoding led to an excessive number of features, resulting in decreased accuracy and increased training time. Therefore, it was ultimately not adopted.
+
 ```
 cols_encoding <- c("experience_level","employment_type","job_title","employee_residence",
                    "company_location","company_size")
@@ -163,6 +166,9 @@ for (col in cols_encoding) {
 }
 ```
 8.  Splitting the data into training and testing sets
+
+- The original plan was to use K-means to create new features. However, since all the features within the dataset are categorical in nature, the K-means method is not feasible.
+
 ```
 do_kmeans <- function(data, cluster_count) {
   k <- cluster_count
@@ -172,6 +178,16 @@ do_kmeans <- function(data, cluster_count) {
 
 data$salary_in_usd_cluster <- do_kmeans(data, 10)
 colnames(data)
+```
+
+- Therefore, in the end, 80% of the data was selected for training using an index-based approach, while 20% was reserved for testing.
+
+```
+data$i <- runif(nrow(data))
+train_data <- subset(data, i >= 0.2)
+test_data <- subset(data, i < 0.2)
+train_data$i <- NULL
+test_data$i <- NULL
 ```
 9.  Transforming Transforming the target variable
 ``` r

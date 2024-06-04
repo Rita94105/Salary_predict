@@ -191,8 +191,17 @@ server <- function(input, output) {
   })
   
   # Step 8: Splitting the data into training and testing sets
-  output$step8 <- renderPrint({
+  output$step8_1 <- renderPrint({
     cat("data$salary_in_usd_cluster <- do_kmeans(data, 10)\n")
+  })
+  
+  output$step8_2 <- renderPrint({
+    cat("data$i <- runif(nrow(data))",
+        "train_data <- subset(data, i >= 0.2)",
+        "test_data <- subset(data, i < 0.2)",
+        "train_data$i <- NULL",
+        "test_data$i <- NULL",
+        sep = "\n")
   })
   
   # Step 9: Transforming the target variable
