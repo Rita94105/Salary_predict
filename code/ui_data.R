@@ -78,5 +78,13 @@ data_ui <- function() {
 }
 
 original_data_ui <- function() {
-  DT::dataTableOutput("ordinal_data")
+  fluidRow(
+    column(
+      width = 12,
+      div(
+        style = "overflow-x: auto;",
+        DT::dataTableOutput("ordinal_data")
+      )
+    )
+  )
 }
