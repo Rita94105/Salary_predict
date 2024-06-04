@@ -10,7 +10,7 @@ prediction_ui <- function(){
           column(
             width = 12,
             card(
-            card_header("Compare with Kaggle's prediction", class = "h6 text-success"),
+            card_header("Compare with Kaggle's prediction", class = "h6 text-primary"),
             HTML("<h5><b>Our accuracy is better than others!</b></h5>"),
             h6("1.",
                a("AIML salaries 2022-2024 AutoViz+CatBoost+SHAP", href = "https://www.kaggle.com/code/dima806/aiml-salaries-2022-2024-autoviz-catboost-shap", target = "_blank"),
