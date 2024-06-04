@@ -62,6 +62,7 @@ data_preprocessing_ui <- function(){
           width = 12,
           h3("Step 7: One-hot Encoding"),
           br(),
+          p("During testing, it was found that One-hot Encoding led to an excessive number of features, resulting in decreased accuracy and increased training time. Therefore, it was ultimately not adopted."),
           verbatimTextOutput("step7"),
           br()
         ),
@@ -69,7 +70,10 @@ data_preprocessing_ui <- function(){
           width = 12,
           h3("Step 8: Splitting the data into training and testing sets "),
           br(),
-          verbatimTextOutput("step8"),
+          p("The original plan was to use K-means to create new features. However, since all the features within the dataset are categorical in nature, the K-means method is not feasible."),
+          verbatimTextOutput("step8_1"),
+          p("Therefore, in the end, 80% of the data was selected for training using an index-based approach, while 20% was reserved for testing."),
+          verbatimTextOutput("step8_2"),
           br()
         ),
         column(
