@@ -8,6 +8,8 @@ Our research findings indicate that job title is the most critical factor in det
 
 This project not only reveals the factors influencing salaries in the data industry but also provides valuable information for those looking to enter the field, helping them make more informed career decisions.
 
+### [Presentation](https://data-engineer-salary-pre-67t6mqn.gamma.site/)
+
 ## Contributors
 
 |     | Name   | ID        | Workload             |
