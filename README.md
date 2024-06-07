@@ -1,4 +1,4 @@
-# [Data Engineer Salary Predict](https://rita94105.shinyapps.io/Salary_2024/)
+# [Data Engineer Salary Predict](https://rita94105.shinyapps.io/DS_2024/)
 
 Since the advent of ChatGPT, AI applications have flourished, driving a surge in demand for data-related positions. This phenomenon sparked our interest in the salary structures within the data industry. On Kaggle, we discovered a dataset on Data Engineer salaries, which led us to undertake a project aimed at predicting salary ranges in the data field based on features such as region, job title, years of experience, and company size.
 
@@ -7,14 +7,6 @@ Our research findings indicate that job title is the most critical factor in det
 This project not only reveals the factors influencing salaries in the data industry but also provides valuable information for those looking to enter the field, helping them make more informed career decisions.
 
 ### [Presentation](https://data-engineer-salary-pre-67t6mqn.gamma.site/)
-
-## Contributors
-
-|     | Name   | ID        | Workload             |
-|-----|--------|-----------|----------------------|
-| 1   | 陳文遠 | 112971012 | Data processing      |
-| 2   | 王世儒 | 112971006 | Model training       |
-| 3   | 任芝萱 | 112971020 | Shiny app developing |
 
 ## [Data](https://www.kaggle.com/datasets/chopper53/data-engineer-salary-in-2024)
 
@@ -343,5 +335,3 @@ Our accuracy is already significantly better than other results on Kaggle.
 However, this is a passable result. We need more data or features to optimize our model training to achieve results that most people can accept. 
 
 Nonetheless, during the training process, we found that job_title is the most important feature, indicating that job titles play a crucial role in predicting salaries.
-
-## Reference
