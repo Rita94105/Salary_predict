@@ -11,9 +11,7 @@ source("ui_code.R")
 footer_ui <- function() {
   div(class = "footer",
       style = "padding: 10px; text-align: center; ;",
-      p("The project is led by ",
-        a(href = "https://www.changlabtw.com/pi-243732347837528.html",target = "_blank", "Dr. Chang"),
-        " in 2024"))
+      a(href = "https://github.com/Rita94105/Salary_predict",target = "_blank", "©Data Engineer Salary in 2024"))
 }
 
 ui <- navbarPage(
