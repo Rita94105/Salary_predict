@@ -10,7 +10,7 @@ server <- function(input, output) {
   observe({
     showModal(modalDialog(
       title = "Let predict salary together!",
-      HTML("Hi everyone, We are Group 2! <br>
+      HTML("Hi everyone, <br>
              The project focus on the salary of the positions in data field.<br> 
              Hope you have a great day and enojoy our result!"),
       easyClose = TRUE,
